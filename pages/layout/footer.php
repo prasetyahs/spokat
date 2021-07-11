@@ -107,6 +107,8 @@
 
   function getIDKuesioner(id) {
     $('#id_kuesioner').val(id);
+    $('#id_transaksi').val(id);
+
   };
 
   $(document).ready(function() {

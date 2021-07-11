@@ -115,7 +115,12 @@ if ($_SESSION['hak_akses'] == 'user') {
                           <a type="button" onclick="getIDTransaction(<?= $d['transaksi_id'] ?>)" href="transaction_list.php" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalRating">
                             Rating
                           </a>
-                          <a type="button" onclick="getIDTransaction(<?= $d['transaksi_id'] ?>)" href="transaction_list.php" class="btn btn-sm btn-warning text-white" data-toggle="modal" data-target="#modalKuesioner">
+                        <?php } ?>
+                        <?php
+                        $res = mysqli_query($con, "SELECT * FROM tb_jawaban_kuesioner where id_transaksi = " . $d['transaksi_id']);
+                        $kuesioner = mysqli_num_rows($res);
+                        if ($d['transaksi_status'] == "3" && $_SESSION['hak_akses'] == 'user' && $kuesioner < 1) { ?>
+                          <a type="button" onclick="getIDKuesioner(<?= $d['transaksi_id'] ?>)" href="transaction_list.php" class="btn btn-sm btn-warning text-white" data-toggle="modal" data-target="#modalKuesioner">
                             Isi Kuesioner
                           </a>
                         <?php } ?>
@@ -214,6 +219,7 @@ require_once 'layout/footer.php';
                 ?>
                   <tr>
                     <td><?= $no ?>.</td>
+                    <input type="hidden" name="id_transaksi" id="id_transaksi">
                     <td><?= $dt['pertanyaan'] ?></td>
                     <td>
                       <div class="form-check">
