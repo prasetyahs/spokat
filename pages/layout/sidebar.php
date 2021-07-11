@@ -102,14 +102,6 @@ require_once("../config/koneksi.php");
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="about.php" class="nav-link">
-            <i class="nav-icon fa fa-address-book"></i>
-            <p>
-              Simulasi
-            </p>
-          </a>
-        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

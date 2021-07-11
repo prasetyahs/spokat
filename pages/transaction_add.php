@@ -52,7 +52,8 @@ if (!empty($newData) && array_key_exists($id_user, $newData)) {
   $recommendations = $data->recommend($id_user, new \stojg\recommend\strategy\Cosine());
   $consine = $data->findNearest($id_user, new \stojg\recommend\strategy\Cosine());
   $sort = $data->sort($recommendations, false);
-  // print_r(simulatonStep($result, $consine, $recommendations, $sort));die;
+  //ini tadi gua pindahin ke bawah buat ngasih tau hasilnya
+  print_r(simulatonStep($result, $consine, $recommendations, $sort));die;
 }
 function simulatonStep($data, $consine, $predict,$sortData)
 {
