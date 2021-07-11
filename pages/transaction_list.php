@@ -103,7 +103,7 @@ if ($_SESSION['hak_akses'] == 'user') {
                           <a href="transaction_delete.php?id=<?php echo $d['transaksi_id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
                         <?php } ?>
                         <?php if ($d['invoice'] != "") { ?>
-                          <a href="transaction_invoice.php?id=<?php echo $d['transaksi_id']; ?>" class="btn btn-sm btn-warning">Invoice</a>
+                          <a href="transaction_invoice.php?id=<?php echo $d['transaksi_id']; ?>" class="btn btn-sm btn-primary">Invoice</a>
                         <?php } ?>
                         <?php if ($d['bukti_transfer'] == "" && $_SESSION['hak_akses'] == 'user') { ?>
                           <a href="transaction_upload_transfer.php?id=<?php echo $d['transaksi_id']; ?>" class="btn btn-sm btn-primary">Upload</a>
@@ -119,6 +119,7 @@ if ($_SESSION['hak_akses'] == 'user') {
                         <?php
                         $res = mysqli_query($con, "SELECT * FROM tb_jawaban_kuesioner where id_transaksi = " . $d['transaksi_id']);
                         $kuesioner = mysqli_num_rows($res);
+                      
                         if ($d['transaksi_status'] == "3" && $_SESSION['hak_akses'] == 'user' && $kuesioner < 1) { ?>
                           <a type="button" onclick="getIDKuesioner(<?= $d['transaksi_id'] ?>)" href="transaction_list.php" class="btn btn-sm btn-warning text-white" data-toggle="modal" data-target="#modalKuesioner">
                             Isi Kuesioner
@@ -193,6 +194,7 @@ require_once 'layout/footer.php';
 <div class="modal fade " id="modalKuesioner" tabindex="-1" role="dialog" aria-labelledby="modalKuesionerLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl	" role="document">
     <form action="add_jawaban_kuesioner.php" method="post">
+      <input type="hidden" name="id_transaksi" id="id_transaksi">
       <div class="modal-content">
         <div class="modal-header justify-content-center">
           <h5 class="modal-title" id="modalKuesionerLabel">Kuesioner</h5>
@@ -208,7 +210,6 @@ require_once 'layout/footer.php';
                   <th>Cukup</th>
                   <th>Kurang</th>
               </thead>
-
               <tbody>
                 <?php
                 $sql = "SELECT * FROM  tb_kuesioner";
@@ -219,7 +220,6 @@ require_once 'layout/footer.php';
                 ?>
                   <tr>
                     <td><?= $no ?>.</td>
-                    <input type="hidden" name="id_transaksi" id="id_transaksi">
                     <td><?= $dt['pertanyaan'] ?></td>
                     <td>
                       <div class="form-check">

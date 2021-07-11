@@ -12,7 +12,7 @@ require_once 'layout/sidebar.php';
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Data Transaksi</h1>
+                    <h1>Data Hasil Kuesioner</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
