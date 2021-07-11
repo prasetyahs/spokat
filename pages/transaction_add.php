@@ -44,9 +44,9 @@ if (!empty($result)) {
     }
     $newData->$k = (array) $tmp;
   }
+  $newData = (array) $newData;
 }
 
-$newData = (array) $newData;
 if (!empty($newData) && array_key_exists($id_user, $newData)) {
   $data = new \stojg\recommend\Data($newData);
   $recommendations = $data->recommend($id_user, new \stojg\recommend\strategy\Cosine());
