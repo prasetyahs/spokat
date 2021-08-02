@@ -2,7 +2,8 @@
 require_once("../config/koneksi.php");
 require_once 'layout/header.php';
 require_once 'layout/sidebar.php';
-include __DIR__ . "../../vendor/autoload.php";
+// include __DIR__ . "../../vendor/autoload.php";
+require_once("../recommend.php");
 function groupingArray($originalArray)
 {
   $arr = array();
@@ -45,35 +46,12 @@ if (!empty($result)) {
     $newData->$k = (array) $tmp;
   }
   $newData = (array) $newData;
+  $re = new Recommend();
+  if (array_key_exists($id_user, $newData) > 0) {
+    $recommendations = $re->getRecommendations($newData, $id_user);
+  }
 }
 
-if (!empty($newData) && array_key_exists($id_user, $newData)) {
-  $data = new \stojg\recommend\Data($newData);
-  $recommendations = $data->recommend($id_user, new \stojg\recommend\strategy\Cosine());
-  $consine = $data->findNearest($id_user, new \stojg\recommend\strategy\Cosine());
-  $sort = $data->sort($recommendations, false);
-  //ini tadi gua pindahin ke bawah buat ngasih tau hasilnya
-  // print_r(simulatonStep($result, $consine, $recommendations, $sort));die;
-}
-function simulatonStep($data, $consine, $predict,$sortData)
-{
-  $result = array();
-  $result['data'] = $data;
-  $result['consine'] = $consine;
-  $result['sort'] = $sortData;
-  $result['predict'] = $predict;
-  return $result;
-}
-
-function array_unique_key($input, $keys)
-{
-  $input = array_filter($input, function ($key) use (&$keys) {
-    return isset($keys[$key]) ? false : $keys[$key] = true;
-  }, ARRAY_FILTER_USE_KEY);
-  return array_map(function ($value) use (&$keys) {
-    return is_array($value) ? array_unique_key($value, $keys) : $value;
-  }, $input);
-}
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -148,11 +126,11 @@ function array_unique_key($input, $keys)
             <ul class="list-group">
               <?php
               if (!empty($recommendations)) {
-                foreach ($recommendations  as $rec) { ?>
-                  <li class="list-group-item list-group-item-danger mb-2 text-dark" style="font-weight: 700;"><?= $rec['key'] ?></li>
+                foreach ($recommendations  as $rec => $d) { ?>
+                  <li class="list-group-item list-group-item-success mb-2 text-dark" style="font-weight: 700;"><?= $rec . "( Nilai : " . $d. ")" ?></li>
                 <?php }
               } else { ?>
-                <li class="list-group-item list-group-item-danger mb-2 text-dark text-center" style="font-weight: 700;">Tidak Tersedia</li>
+                <li class="list-group-item list-group-item-success mb-2 text-dark text-center" style="font-weight: 700;">Tidak Tersedia</li>
               <?php } ?>
             </ul>
           </div>

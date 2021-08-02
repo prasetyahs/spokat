@@ -40,6 +40,14 @@ require_once("../config/koneksi.php");
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="simulasi_method.php" class="nav-link">
+            <i class="nav-icon fa fa-file"></i>
+            <p>
+              Simulasi Rekomendasi
+            </p>
+          </a>
+        </li>
         <?php if ($_SESSION['hak_akses'] == 'super' || $_SESSION['hak_akses'] == 'admin') { ?>
           <li class="nav-item">
             <a href="kuesioner.php" class="nav-link">
@@ -48,7 +56,6 @@ require_once("../config/koneksi.php");
                 Kuesioner
               </p>
             </a>
-
           </li>
           <li class="nav-item">
             <a href="hasil_jawaban_kuesioner.php" class="nav-link">
