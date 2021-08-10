@@ -20,6 +20,7 @@ for($i = 0; $i < count($dataLayanan); $i++){
     array_push($arrayLayanan,$namaLayanan);
 }
 $dataGrafikLayanan = readGrafikLayanan($years,$con);
+$dataGrafikJk = readGrafikJk($years,$con);
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -77,14 +78,14 @@ $dataGrafikLayanan = readGrafikLayanan($years,$con);
                                 </div>
                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab pt-4 pb-2">
                                     <div class="chart-pie pt-4 pb-2">
-                                        <h4 class="text-center mt-4">Grafik Layanan Tahun <?= $years ?></h4>
+                                        <h4 class="text-center mt-4">Grafik Transaksi Berdasarkan Layanan Tahun <?= $years ?></h4>
                                         <canvas id="chartLayanan" height="100"></canvas>
                                     </div>
                                 </div>
 
                                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                                     <div class="chart-pie pt-4 pb-2">
-                                    <h4 class="text-center mt-4">Grafik ... Tahun <?= $years ?></h4>
+                                    <h4 class="text-center mt-4">Grafik Transaksi Berdasarkan Jenis Kelamin Tahun <?= $years ?></h4>
                                         <canvas id="chartJk" height="80"></canvas>
                                     </div>
                                 </div>

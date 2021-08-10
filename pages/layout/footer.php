@@ -189,17 +189,15 @@
   // CHART JENIS KELAMIN
   const dataJk = {
     labels: [
-      'Red',
-      'Blue',
-      'Yellow'
+      'Laki-Laki',
+      'Perempuan'
     ],
     datasets: [{
       label: 'My First Dataset',
-      data: [300, 50, 100],
+      data: <?= json_encode($dataGrafikJk) ?>,
       backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)'
+        'rgb(51, 225, 227)',
+        'rgb(255, 168, 51)',
       ],
       hoverOffset: 4
     }]

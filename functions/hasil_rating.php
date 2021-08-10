@@ -3,20 +3,60 @@
     function getDataRating($idLayanan,$con){
        
         $allBintang = getCountRating($con,$idLayanan);
+        if($allBintang == null){
+            $allBintang = 0;
+        }else{
+            $allBintang = count($allBintang);
+        }
         $bintang5 = getCountRating($con,$idLayanan,5);
+        if($bintang5 == null){
+            $bintang5 = 0;
+        }else{
+            $bintang5 = count($bintang5);
+        }
+        
         $bintang4 = getCountRating($con,$idLayanan,4);
+        if($bintang4 == null){
+            $bintang4 = 0;
+        }else{
+            $bintang4 = count($bintang4);
+        }
+
         $bintang3 = getCountRating($con,$idLayanan,3);
+        if($bintang3 == null){
+            $bintang3 = 0;
+        }else{
+            $bintang3 = count($bintang3);
+        }
         $bintang2 = getCountRating($con,$idLayanan,2);
+
+        if($bintang2 == null){
+            $bintang2 = 0;
+        }else{
+            $bintang2 = count($bintang2);
+        }
         $bintang1 = getCountRating($con,$idLayanan,1);
-        $rata_rata =  ((5*count($bintang5)) + (4*count($bintang4)) + (3*count($bintang3)) + (2*count($bintang2)) + (1*count($bintang1))) / count($allBintang);
+        if($bintang1 == null){
+            $bintang1 = 0;
+        }else{
+            $bintang1 = count($bintang1);
+        }
+        if($allBintang != 0){
+
+            $rata_rata =  ((5*$bintang5) + (4*$bintang4) + (3*$bintang3) + (2*$bintang2) + (1*$bintang1)) / $allBintang;
+        }else{
+            $rata_rata = 0;
+        }
+
         $rating = [
-            "all_bintang" => count($allBintang),
-            "bintang5" => count($bintang5),
-            "bintang4" => count($bintang4),
-            "bintang3" => count($bintang3),
-            "bintang2" => count($bintang2),
-            "bintang1" => count($bintang1),
+            "all_bintang" => $allBintang,
+            "bintang5" => $bintang5,
+            "bintang4" => $bintang4,
+            "bintang3" => $bintang3,
+            "bintang2" => $bintang2,
+            "bintang1" => $bintang1,
             "rata_rata" => $rata_rata
+            
         ];
         return $rating;
 

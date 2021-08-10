@@ -52,3 +52,19 @@
                         year(transaksi_tgl) = '$years'";
         return $query;
     }
+
+    function readGrafikJk($years,$con){
+        $query = "SELECT * FROM transaksi 
+                    JOIN users ON transaksi.id_user = users.id_user
+                    WHERE jenis_kelamin = 'Laki-Laki'";
+        $laki = readDataAllRow($con,$query);
+        $queryCewe = "SELECT * FROM transaksi 
+                    JOIN users ON transaksi.id_user = users.id_user
+                    WHERE jenis_kelamin != 'Laki-Laki'";
+        $cewe = readDataAllRow($con,$queryCewe);
+        $array = [
+            count($laki),
+            count($cewe)
+        ];
+        return $array;
+    }   

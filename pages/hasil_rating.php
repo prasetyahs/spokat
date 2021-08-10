@@ -38,7 +38,14 @@ $dataUlasan = readDataAllRow($con,"SELECT * FROM tb_rating
                             <div class="row mt-5">
                                 <div class="col-6">
                                     <div class="d-flex justify-content-center">
-                                        <h1 class="font-weight-bold txt-rating"><?= $getDataRating['rata_rata'] ?> <span style="font-size: 30%;margin-left:-15px;">/5</span></h1> <br>
+                                        <?php if(is_nan($getDataRating['rata_rata'])){ ?>
+                                        <h1 class="font-weight-bold txt-rating">0
+                                        <?php }else{ ?>
+                                        <h1 class="font-weight-bold txt-rating"><?= $getDataRating['rata_rata'] ?>
+                                        <?php } ?>
+                                            <span style="font-size: 30%;margin-left:-15px;">/5</span>
+                                        </h1>
+                                         <br>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="clip-star" style="background: gold;width: 50px; height: 50px;"></div>
@@ -51,11 +58,14 @@ $dataUlasan = readDataAllRow($con,"SELECT * FROM tb_rating
                                 <div class="col-6 mb-5">
                                     <!-- bintang 5 -->
                                     <?php 
-                                        $lengthProgress5 = ($getDataRating['bintang5']/$getDataRating['all_bintang'])*100;
-                                        $lengthProgress4 = ($getDataRating['bintang4']/$getDataRating['all_bintang'])*100;
-                                        $lengthProgress3 = ($getDataRating['bintang3']/$getDataRating['all_bintang'])*100;
-                                        $lengthProgress2 = ($getDataRating['bintang2']/$getDataRating['all_bintang'])*100;
-                                        $lengthProgress1 = ($getDataRating['bintang1']/$getDataRating['all_bintang'])*100;
+                                        if($getDataRating['rata_rata'] != 0){
+
+                                            $lengthProgress5 = ($getDataRating['bintang5']/$getDataRating['all_bintang'])*100;
+                                            $lengthProgress4 = ($getDataRating['bintang4']/$getDataRating['all_bintang'])*100;
+                                            $lengthProgress3 = ($getDataRating['bintang3']/$getDataRating['all_bintang'])*100;
+                                            $lengthProgress2 = ($getDataRating['bintang2']/$getDataRating['all_bintang'])*100;
+                                            $lengthProgress1 = ($getDataRating['bintang1']/$getDataRating['all_bintang'])*100;
+                                        }
                                     ?>
                                     <div class="row text-left">
                                         <div class="pull-left col-sm-2 col-md-3 col" style="line-height: 1;"><span class="clip-star1"></span><span style="font-size: 25px; padding-left: 10px;">5</span></div>
