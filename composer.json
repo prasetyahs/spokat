@@ -1,0 +1,8 @@
+{
+    "require": {
+        "tigo/recommendation": "^0.0.2",
+        "stojg/recommend": "^1.0",
+        "phpjuice/slopeone": "^1.0",
+        "phpoffice/phpspreadsheet": "^1.18"
+    }
+}
