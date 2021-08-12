@@ -24,6 +24,14 @@ require_once("../config/koneksi.php");
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="rating_layanan.php" class="nav-link">
+            <i class="nav-icon fa fa-book"></i>
+            <p>
+              Rating Layanan
+            </p>
+          </a>
+        </li>
         <?php if ($_SESSION['hak_akses'] == 'super') { ?>
           <li class="nav-item">
             <a href="user_list.php" class="nav-link">
@@ -62,16 +70,9 @@ require_once("../config/koneksi.php");
               </p>
             </a>
           </li>
-         
+
         <?php } ?>
-        <li class="nav-item">
-            <a href="hasil_jawaban_kuesioner.php" class="nav-link">
-              <i class="nav-icon fa fa-book"></i>
-              <p>
-                Hasil Kuesioner
-              </p>
-            </a>
-          </li>
+
         <?php if ($_SESSION['hak_akses'] == 'super' || $_SESSION['hak_akses'] == 'admin') { ?>
           <!-- <li class="nav-item">
             <a href="report.php" class="nav-link">
@@ -81,37 +82,38 @@ require_once("../config/koneksi.php");
               </p>
             </a>
           </li> -->
-             <li class="nav-item">
-            <a href="rating_layanan.php" class="nav-link">
+          <li class="nav-item">
+            <a href="hasil_jawaban_kuesioner.php" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
               <p>
-                Rating Layanan
+                Hasil Kuesioner
               </p>
             </a>
           </li>
+
           <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fa fa-newspaper"></i>
-            <p>
-              Laporan
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="report.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Laporan Transaksi</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="report_grafik.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Laporan Grafik</p>
-              </a>
-            </li>
-          </ul>
-        </li>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-newspaper"></i>
+              <p>
+                Laporan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="report.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Transaksi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="report_grafik.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Grafik</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         <?php } ?>
         <li class="nav-item">
           <a href="#" class="nav-link">

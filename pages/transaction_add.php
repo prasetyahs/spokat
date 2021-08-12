@@ -13,9 +13,20 @@ function groupingArray($originalArray)
   return $arr;
 }
 $id_user = $_SESSION['id_user'];
-$sql = "SELECT tb_rating.rate,transaksi.id_user,layanan.nama_layanan FROM tb_rating join transaksi on tb_rating.id_transaksi = transaksi.transaksi_id join layanan on transaksi.id_layanan = layanan.id_layanan";
+$sql = "SELECT  tb_rating.rate,transaksi.id_user,layanan.nama_layanan FROM tb_rating join transaksi on tb_rating.id_transaksi = transaksi.transaksi_id join layanan on transaksi.id_layanan = layanan.id_layanan";
 $exc = mysqli_query($con, $sql);
 $result = mysqli_fetch_all($exc, MYSQLI_ASSOC);
+$withoutTrade = array();
+foreach ($result as $key => $d) {
+  $withoutTrade[$d['nama_layanan']] =  isset($withoutTrade[$d['nama_layanan']]) ? $withoutTrade[$d['nama_layanan']] += $d['rate'] : $d['rate'];
+}
+
+foreach ($withoutTrade as $k => $val) {
+  $query = "SELECT layanan.nama_layanan,COUNT(id_rating) FROM tb_rating join transaksi on tb_rating.id_transaksi = transaksi.transaksi_id join layanan on transaksi.id_layanan = layanan.id_layanan where layanan.nama_layanan ='$k'";
+  $count = mysqli_fetch_all(mysqli_query($con, $query))[0][1];
+  $withoutTrade[$k] = ($val / $count);
+}
+array_multisort($withoutTrade, SORT_DESC);
 
 if (!empty($result)) {
   $oldData = groupingArray($result);
@@ -50,9 +61,14 @@ if (!empty($result)) {
   if (array_key_exists($id_user, $newData) > 0) {
     $recommendations = $re->getRecommendations($newData, $id_user);
   } else {
-    usort($result, function ($item1, $item2) {
-      return $item2['rate'] <=> $item1['rate'];
-    });
+    $index = 0;
+    foreach ($withoutTrade as $kt => $dat) {
+      $recommendations[$kt] = $dat;
+      if ($index >= 2) {
+        break;
+      }
+      $index++;
+    }
   }
 }
 
@@ -82,13 +98,13 @@ if (!empty($result)) {
                   <div class="form-group">
                     <label>Layanan</label>
                     <select name="id_layanan" id="id_layanan" class="form-control">
-                      <option value="">Pilih Layanan</option>
+                      <option value="asdasd">Pilih Layanan</option>
                       <!-- mengambil nilai combo box dari database -->
                       <?php
                       $query = mysqli_query($con, "select id_layanan,nama_layanan from layanan");
                       while ($data2 = mysqli_fetch_assoc($query)) {
                         if ($data1 == $data2[$id_layanan])
-                          echo "<option value=$data2[id_layanan] selected>$data2[nama_layanan]</option>";
+                          echo "<option value=$data2[id_layanan]>$data2[nama_layanan]</option>";
                         else echo "<option value=$data2[id_layanan]>$data2[nama_layanan]</option>";
                       }
                       ?>
