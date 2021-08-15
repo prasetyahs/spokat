@@ -5,6 +5,7 @@
     <b>Version</b> 3.0.3
   </div>
 </footer>
+
 <div class="modal fade " id="modalKuesioner" tabindex="-1" role="dialog" aria-labelledby="modalKuesionerLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl	" role="document">
     <form action="add_jawaban_kuesioner.php" method="post">
@@ -65,6 +66,8 @@
     </form>
   </div>
 </div>
+
+
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
   <!-- Control sidebar content goes here -->
@@ -235,12 +238,23 @@
             <div class="row justify-content-center mt-2">
               <h2 class="valueRate">0.0</h2>
             </div>
+
             <input type="hidden" class="form-control" id="valueRate" name="rating" required></input>
             <input type="hidden" class="form-control" id="idTrade" name="id_transaksi" required></input>
+            <div class="form-group">
+              <label for="">Komplain</label>
+              <select name="id_komplain" id="id_komplain" class="form-control">
+                <option value="">Pilih Kategori Komplain</option>
+                <?php
+                foreach ($categoryComplain as $key => $v) {
+                ?>
+                  <option value="<?= $v['id_komplain'] ?>"><?= $v['nama_komplain'] ?></option>
+                <?php } ?>
+              </select>
+            </div>
             <div class="form-group mt-1">
               <label>Pesan</label>
               <textarea type="number" rows="5" class="form-control" id="message" name="message" required></textarea>
-
             </div>
 
           </div>

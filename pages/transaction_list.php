@@ -1,5 +1,6 @@
 <?php
 require_once("../config/koneksi.php");
+require_once "../functions/crud.php";
 require_once 'layout/header.php';
 require_once 'layout/sidebar.php';
 $user_id = $_SESSION['id_user'];
@@ -13,6 +14,7 @@ if ($_SESSION['hak_akses'] == 'user') {
     INNER JOIN users ON transaksi.id_user = users.id_user
     INNER JOIN layanan ON transaksi.id_layanan = layanan.id_layanan");
 }
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -44,7 +46,7 @@ if ($_SESSION['hak_akses'] == 'user') {
                   $row = mysqli_num_rows($exec);
                   if ($row <= 0) {
                   ?>
-                  <?php } ?>
+                  <?php }?>
                 </div>
               <?php } ?>
               <table id="example2" class="table table-bordered table-striped">
@@ -119,7 +121,6 @@ if ($_SESSION['hak_akses'] == 'user') {
                         <?php
                         $res = mysqli_query($con, "SELECT * FROM tb_jawaban_kuesioner where id_transaksi = " . $d['transaksi_id']);
                         $kuesioner = mysqli_num_rows($res);
-                      
                         if ($d['transaksi_status'] == "3" && $_SESSION['hak_akses'] == 'user' && $kuesioner < 1) { ?>
                           <a type="button" onclick="getIDKuesioner(<?= $d['transaksi_id'] ?>)" href="transaction_list.php" class="btn btn-sm btn-warning text-white" data-toggle="modal" data-target="#modalKuesioner">
                             Isi Kuesioner

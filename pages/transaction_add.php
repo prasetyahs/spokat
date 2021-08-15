@@ -60,6 +60,16 @@ if (!empty($result)) {
   $re = new Recommend();
   if (array_key_exists($id_user, $newData) > 0) {
     $recommendations = $re->getRecommendations($newData, $id_user);
+    if (empty($recommendations)) {
+      $index = 0;
+      foreach ($withoutTrade as $kt => $dat) {
+        $recommendations[$kt] = $dat;
+        if ($index >= 2) {
+          break;
+        }
+        $index++;
+      }
+    }
   } else {
     $index = 0;
     foreach ($withoutTrade as $kt => $dat) {

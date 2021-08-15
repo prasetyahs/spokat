@@ -70,7 +70,22 @@ require_once("../config/koneksi.php");
               </p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="complain.php" class="nav-link">
+              <i class="nav-icon fa fa-comment"></i>
+              <p>
+                Komplain
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="hasil-review.php" class="nav-link">
+              <i class="nav-icon fa fa-file"></i>
+              <p>
+                Hasil Review
+              </p>
+            </a>
+          </li>
         <?php } ?>
 
         <?php if ($_SESSION['hak_akses'] == 'super' || $_SESSION['hak_akses'] == 'admin') { ?>
