@@ -33,7 +33,10 @@
                         <input type="submit" class="btn btn-primary" value="Log In">                
                     </div>
                     <br/>
+                    <div class="group " style="margin-left: 13px;">
                     <p>Belum Punya Akun Silahkan <a href="register.php">Register</a></p>
+                    <p>Klik untuk <a href="lupa_password.php">Lupa Password</a></p>
+                    </div>
                 </div>
             </form>.jpg
         </div>

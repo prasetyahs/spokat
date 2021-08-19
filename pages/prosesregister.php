@@ -7,6 +7,7 @@ require_once("../config/koneksi.php");
   $address = $_POST['address'];
   $birth = $_POST['birth'];
   $password = md5($_POST['password']);
+  $email = $_POST['email'];
   //mengecek username sama atau tidak
   $data = mysqli_query($con,"select * from users where username='$username'");
   $jumlah = mysqli_num_rows($data);
@@ -20,6 +21,7 @@ require_once("../config/koneksi.php");
             $simpan = mysqli_query($con,"INSERT INTO users VALUES(null,
                                                                    '$name',              
                                                                    '$username',
+                                                                   '$email',
                                                                    '$password',
                                                                    '$no_hp',
                                                                    '$address',
