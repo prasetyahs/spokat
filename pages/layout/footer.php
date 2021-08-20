@@ -103,6 +103,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../assets/js/demo.js"></script>
 <!-- Page specific script -->
+
 <script>
   $(function() {
     $("#example1").DataTable({
@@ -220,14 +221,14 @@
 
 
 <div class="modal fade" id="modalRating" tabindex="-1" role="dialog" aria-labelledby="modalRatingLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <form action="rating_submit.php" method="post">
       <div class="modal-content">
         <div class="modal-header justify-content-center">
-          <h5 class="modal-title" id="modalRatingLabel">Review Jasa Cuci</h5>
+          <h5 class="modal-title" id="modalRatingLabel">Review Jasa Cuci Dan Komplain</h5>
         </div>
-        <div class="modal-body">
-          <div class="col-12">
+        <div class="modal-body row pl-5 pr-5">
+          <div class="col-6">
             <div class="row justify-content-center pt-2 pb-2" style="background-color: #f5f5f5;border-radius:50px">
               <span class="fa fa-star checked mr-2" id="st1"></span>
               <span class="fa fa-star checked mr-2" id="st2"></span>
@@ -238,32 +239,36 @@
             <div class="row justify-content-center mt-2">
               <h2 class="valueRate">0.0</h2>
             </div>
-
             <input type="hidden" class="form-control" id="valueRate" name="rating" required></input>
             <input type="hidden" class="form-control" id="idTrade" name="id_transaksi" required></input>
+            <div class="form-group mt-1">
+              <label>Ulasan</label>
+              <textarea type="number" rows="5" class="form-control" id="message" name="message" required></textarea>
+            </div>
+          </div>
+          <div class="col-6">
             <div class="form-group">
-              <label for="">Komplain</label>
-              <select name="id_komplain" id="id_komplain" class="form-control">
-                <option value="">Pilih Kategori Komplain</option>
+              <label for="exampleFormControlSelect1">Kategori Komplain</label>
+              <select class="form-control" id="exampleFormControlSelect1" name="kategori_complain">
+                <option>--Pilih--</option>
                 <?php
-                foreach ($categoryComplain as $key => $v) {
+                $category = readDataAllRow($con, "SELECT * FROM `tb_kategori_komplain`");
+                
+                foreach ($category as $c) {
                 ?>
-                  <option value="<?= $v['id_komplain'] ?>"><?= $v['nama_komplain'] ?></option>
+                  <option value="<?= $c['id']?>"><?= $c['jenis_komplain'] ?></option>
                 <?php } ?>
               </select>
             </div>
-            <div class="form-group mt-1">
-              <label>Pesan</label>
-              <textarea type="number" rows="5" class="form-control" id="message" name="message" required></textarea>
+            <div class="form-group" style="margin-top: 20px;">
+              <label>Pesan Komplain</label>
+              <textarea type="number" rows="2" class="form-control" id="message" name="messagekomplain"></textarea>
             </div>
-
           </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-          <button type="submit" class="btn btn-success">Simpan</button>
-        </div>
+          <div class="modal-footer">
+            <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn btn-success">Simpan</button>
+          </div>
     </form>
   </div>
 </div>

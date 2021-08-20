@@ -46,7 +46,7 @@ if ($_SESSION['hak_akses'] == 'user') {
                   $row = mysqli_num_rows($exec);
                   if ($row <= 0) {
                   ?>
-                  <?php }?>
+                  <?php } ?>
                 </div>
               <?php } ?>
               <table id="example2" class="table table-bordered table-striped">
@@ -118,6 +118,7 @@ if ($_SESSION['hak_akses'] == 'user') {
                             Rating
                           </a>
                         <?php } ?>
+                      
                         <?php
                         $res = mysqli_query($con, "SELECT * FROM tb_jawaban_kuesioner where id_transaksi = " . $d['transaksi_id']);
                         $kuesioner = mysqli_num_rows($res);

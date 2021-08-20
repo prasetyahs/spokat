@@ -42,17 +42,26 @@ if (isset($_GET['id'])) {
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Invoice</th>
+                                        <th>Tanggal Transaksi</th>
+                                        <th>Nama Pelanggan</th>
+                                        <th>Layanan</th>
                                         <th>Jenis Komplain</th>
                                         <th>Pesan</th>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    $result = readDataAllRow($con, "SELECT * FROM tb_komplain join tb_kategori_komplain on tb_komplain.kategori_komplain = tb_kategori_komplain.id");
+                                    $result = readDataAllRow($con, "SELECT * FROM tb_komplain join tb_kategori_komplain on tb_komplain.kategori_komplain = tb_kategori_komplain.id 
+                                    join transaksi on tb_komplain.id_transaksi = transaksi_id join users on users.id_user = transaksi.id_user join layanan on layanan.id_layanan = transaksi.id_layanan");
                                     foreach ($result as $dt) {
                                     ?>
                                         <tr>
                                             <td><?= $no++ ?>.</td>
+                                            <td><?= $dt['invoice'] ?></td>
+                                            <td><?= $dt['transaksi_tgl'] ?></td>
+                                            <td><?= $dt['nama'] ?></td>
+                                            <td><?= $dt['nama_layanan'] ?></td>
                                             <td><?= $dt['jenis_komplain'] ?></td>
                                             <td><?= $dt['pesan'] ?></td>
 
