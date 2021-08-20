@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Agu 2021 pada 20.00
+-- Waktu pembuatan: 20 Agu 2021 pada 16.25
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.3.28
 
@@ -137,6 +137,45 @@ INSERT INTO `tb_jawaban_kuesioner` (`id_jawaban`, `id_kuesioner`, `id_user`, `id
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_kategori_komplain`
+--
+
+CREATE TABLE `tb_kategori_komplain` (
+  `id` int(11) NOT NULL,
+  `jenis_komplain` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_kategori_komplain`
+--
+
+INSERT INTO `tb_kategori_komplain` (`id`, `jenis_komplain`) VALUES
+(8, 'Tidak Bersih'),
+(9, 'Tidak Bersih');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_komplain`
+--
+
+CREATE TABLE `tb_komplain` (
+  `id_komplain` int(11) NOT NULL,
+  `kategori_komplain` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
+  `pesan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_komplain`
+--
+
+INSERT INTO `tb_komplain` (`id_komplain`, `kategori_komplain`, `id_transaksi`, `pesan`) VALUES
+(7, 8, 44, 'asdasdsa');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_kuesioner`
 --
 
@@ -171,20 +210,7 @@ CREATE TABLE `tb_rating` (
 --
 
 INSERT INTO `tb_rating` (`id_rating`, `id_transaksi`, `pesan`, `rate`) VALUES
-(27, 29, 'Wangi, Bersih', 4),
-(28, 30, 'Bersih dan wangi', 3),
-(29, 31, 'wangi,bersih', 2),
-(30, 32, 'wangi', 4),
-(31, 33, 'wangi', 5),
-(32, 34, 'Wangi', 5),
-(33, 35, 'Wangi', 4),
-(34, 36, 'Wangi', 4),
-(35, 37, 'wangi', 5),
-(36, 38, 'bersih dan wangi', 5),
-(37, 39, 'Wangi bersih', 5),
-(38, 40, 'dsadas', 5),
-(39, 28, 'test', 5),
-(40, 42, 'wangi', 5);
+(49, 44, 'dsadas', 4);
 
 -- --------------------------------------------------------
 
@@ -225,7 +251,13 @@ INSERT INTO `transaksi` (`transaksi_id`, `invoice`, `id_layanan`, `id_user`, `tr
 (39, 'INV/11/25-07-2021', 2, 14, 2, 95000, 3, '2021-07-25', '2021-07-29', 'Melati', 'bukti_transfer_trf__1577263390_4882166a_progressive.jpg'),
 (40, 'INV/13/10-08-2021', 2, 19, 12, 495000, 3, '2021-08-10', '2021-08-12', 'dasdsa', 'Capture.PNG'),
 (41, NULL, 4, 19, 12, 855000, 0, '2021-08-10', NULL, 'dsadas', NULL),
-(42, 'INV/14/10-08-2021', 2, 8, 12, 495000, 3, '2021-08-10', '2021-08-22', 'dsadsa', 'erd.PNG');
+(42, 'INV/14/10-08-2021', 2, 8, 12, 495000, 3, '2021-08-10', '2021-08-22', 'dsadsa', 'erd.PNG'),
+(43, 'INV/15/11-08-2021', 6, 8, 2, 165000, 3, '2021-08-11', '2021-08-12', 'asdasdsa', 'Capture.PNG'),
+(44, 'INV/16/12-08-2021', 2, 21, 12, 495000, 3, '2021-08-12', '2021-08-13', 'dasdsa', 'Capture.PNG'),
+(45, 'INV/17/12-08-2021', 3, 21, 12, 615000, 3, '2021-08-12', '2021-08-13', 'sasa', 'Capture.PNG'),
+(46, NULL, 3, 19, 12, 615000, 0, '2021-08-13', NULL, 'das', NULL),
+(47, NULL, 2, 19, 12, 495000, 0, '2021-08-13', NULL, 'dasdsa', NULL),
+(48, NULL, 2, 21, 12, 495000, 0, '2021-08-20', NULL, 'saas', NULL);
 
 -- --------------------------------------------------------
 
@@ -250,24 +282,26 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `nama`, `username`, `password`, `no_hp`, `alamat`, `jenis_kelamin`, `tanggal_lahir`, `hak_akses`) VALUES
-(1, '', 'admin', '21232f297a57a5a743894a0e4a801fc3', '08923113112211', '', 'Laki-Laki', NULL, 'super'),
-(2, '', 'user', '6ad14ba9986e3615423dfca256d04e3f', '089213131231232', '', 'Laki-Laki', NULL, 'user'),
-(3, '', 'deni', 'ee11cbb19052e40b07aac0ca060c23ee', '0823131231', '', 'Laki-Laki', NULL, 'user'),
-(4, '', 'diki', 'dffaa4c60a250f19dc4a79b1d05c8d53', '08312321231', '', 'Laki-Laki', NULL, 'user'),
-(7, '', 'adminbandung', 'b8f8312b939f00abb38eeafd4fd107f3', '08982312312223', '', 'Laki-Laki', NULL, 'admin'),
-(8, '', 'prasetya', '7815696ecbf1c96e6894b779456d330e', '089897382189', '', 'Laki-Laki', NULL, 'user'),
-(9, '', 'hehe', '7815696ecbf1c96e6894b779456d330e', '432423', '', 'Laki-Laki', NULL, 'user'),
-(10, '', 'usertest', 'a8f5f167f44f4964e6c998dee827110c', '089506277284', '', 'Laki-Laki', NULL, 'user'),
-(11, '', 'ilham', 'b8f8312b939f00abb38eeafd4fd107f3', '089681011657', '', 'Laki-Laki', NULL, 'user'),
-(12, '', 'bagas', 'b6d767d2f8ed5d21a44b0e5886680cb9', '0856782778', '', 'Laki-Laki', NULL, 'user'),
-(13, '', 'ifan', 'c4ca4238a0b923820dcc509a6f75849b', '0876252667', '', 'Laki-Laki', NULL, 'user'),
-(14, '', 'gino', 'c81e728d9d4c2f636f067f89cc14862c', '087623345', '', 'Laki-Laki', NULL, 'user'),
-(15, '', 'yanto', 'eccbc87e4b5ce2fe28308fd9f2a7baf3', '0896729938', '', 'Laki-Laki', NULL, 'user'),
-(16, '', 'gg', '7815696ecbf1c96e6894b779456d330e', '089506277284', '', 'Laki-Laki', NULL, 'user'),
-(17, '', 'dsadsa', '89defae676abd3e3a42b41df17c40096', 'dasdas', '', 'Laki-Laki', NULL, 'user'),
+(1, 'hehe', 'admin', '21232f297a57a5a743894a0e4a801fc3', '08923113112211', '', 'Laki-Laki', NULL, 'super'),
+(2, 'asd', 'user', '6ad14ba9986e3615423dfca256d04e3f', '089213131231232', '', 'Laki-Laki', NULL, 'user'),
+(3, 'asd', 'deni', 'ee11cbb19052e40b07aac0ca060c23ee', '0823131231', '', 'Laki-Laki', NULL, 'user'),
+(4, 'bb', 'diki', 'dffaa4c60a250f19dc4a79b1d05c8d53', '08312321231', '', 'Laki-Laki', NULL, 'user'),
+(7, 'cc', 'adminbandung', 'b8f8312b939f00abb38eeafd4fd107f3', '08982312312223', '', 'Laki-Laki', NULL, 'admin'),
+(8, 'dd', 'prasetya', '7815696ecbf1c96e6894b779456d330e', '089897382189', '', 'Laki-Laki', NULL, 'user'),
+(9, 'cc', 'hehe', '7815696ecbf1c96e6894b779456d330e', '432423', '', 'Laki-Laki', NULL, 'user'),
+(10, 'ww', 'usertest', 'a8f5f167f44f4964e6c998dee827110c', '089506277284', '', 'Laki-Laki', NULL, 'user'),
+(11, 'll', 'ilham', 'b8f8312b939f00abb38eeafd4fd107f3', '089681011657', '', 'Laki-Laki', NULL, 'user'),
+(12, 'mm', 'bagas', 'b6d767d2f8ed5d21a44b0e5886680cb9', '0856782778', '', 'Laki-Laki', NULL, 'user'),
+(13, 'aasdas', 'ifan', 'c4ca4238a0b923820dcc509a6f75849b', '0876252667', '', 'Laki-Laki', NULL, 'user'),
+(14, 'asdklaskokdosa', 'gino', 'c81e728d9d4c2f636f067f89cc14862c', '087623345', '', 'Laki-Laki', NULL, 'user'),
+(15, 'asd', 'yanto', 'eccbc87e4b5ce2fe28308fd9f2a7baf3', '0896729938', '', 'Laki-Laki', NULL, 'user'),
+(16, 'ppp', 'gg', '7815696ecbf1c96e6894b779456d330e', '089506277284', '', 'Laki-Laki', NULL, 'user'),
+(17, 'dd', 'dsadsa', '89defae676abd3e3a42b41df17c40096', 'dasdas', '', 'Laki-Laki', NULL, 'user'),
 (18, 'asdasd', 'asdasd', '89defae676abd3e3a42b41df17c40096', '089506277284', 'asdasd', 'Laki-Laki', '2021-08-11', 'user'),
 (19, 'prasetya', 'asd', '7815696ecbf1c96e6894b779456d330e', '089506277284', 'asd', 'Laki-Laki', '2021-08-20', 'user'),
-(20, 'asd', 'cc', 'e0323a9039add2978bf5b49550572c7c', '089506277284', 'cc', 'Laki-Laki', '2021-08-12', 'user');
+(20, 'asd', 'cc', 'e0323a9039add2978bf5b49550572c7c', '089506277284', 'cc', 'Laki-Laki', '2021-08-12', 'user'),
+(21, 'asdff', 'asd12', '7815696ecbf1c96e6894b779456d330e', '089506277284', 'asd', 'Perempuan', '2021-08-26', 'user'),
+(22, 'Prasetya Hadi Saputra', 'asd13', '7815696ecbf1c96e6894b779456d330e', '089506277284', 'dasdas', 'Laki-Laki', '2021-02-02', 'user');
 
 --
 -- Indexes for dumped tables
@@ -299,6 +333,19 @@ ALTER TABLE `tb_jawaban_kuesioner`
   ADD KEY `id_kuesioner` (`id_kuesioner`),
   ADD KEY `tb_jawaban_kuesioner_ibfk_2` (`id_user`),
   ADD KEY `id_transaksi` (`id_transaksi`);
+
+--
+-- Indeks untuk tabel `tb_kategori_komplain`
+--
+ALTER TABLE `tb_kategori_komplain`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tb_komplain`
+--
+ALTER TABLE `tb_komplain`
+  ADD PRIMARY KEY (`id_komplain`),
+  ADD KEY `tb_komplain_ibfk_1` (`kategori_komplain`);
 
 --
 -- Indeks untuk tabel `tb_kuesioner`
@@ -354,6 +401,18 @@ ALTER TABLE `tb_jawaban_kuesioner`
   MODIFY `id_jawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_kategori_komplain`
+--
+ALTER TABLE `tb_kategori_komplain`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_komplain`
+--
+ALTER TABLE `tb_komplain`
+  MODIFY `id_komplain` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_kuesioner`
 --
 ALTER TABLE `tb_kuesioner`
@@ -363,19 +422,19 @@ ALTER TABLE `tb_kuesioner`
 -- AUTO_INCREMENT untuk tabel `tb_rating`
 --
 ALTER TABLE `tb_rating`
-  MODIFY `id_rating` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_rating` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -388,6 +447,12 @@ ALTER TABLE `tb_jawaban_kuesioner`
   ADD CONSTRAINT `tb_jawaban_kuesioner_ibfk_1` FOREIGN KEY (`id_kuesioner`) REFERENCES `tb_kuesioner` (`id_kuesioner`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_jawaban_kuesioner_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_jawaban_kuesioner_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`transaksi_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `tb_komplain`
+--
+ALTER TABLE `tb_komplain`
+  ADD CONSTRAINT `tb_komplain_ibfk_1` FOREIGN KEY (`kategori_komplain`) REFERENCES `tb_kategori_komplain` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_rating`
